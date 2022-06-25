@@ -1,0 +1,152 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: last
+          uri: ${DEFAULT_GATEWAY_ROUTES_URI:http://dev.sh}
+          order: 20100
+          predicates:
+            - Path=/**,//**
+        - id: api
+          uri: ${DEFAULT_GATEWAY_ROUTES_URI:http://dev.sh}
+          order: 100
+          predicates:
+            - Path=/api/**,//api/**
+        - id: base
+          uri: ${DEFAULT_GATEWAY_ROUTES_URI:http://dev.sh}
+          order: 101
+          predicates:
+            - Path=/base/**,//base/**
+        - id: auth
+          uri: ${DEFAULT_GATEWAY_ROUTES_URI:http://dev.sh}
+          order: 102
+          predicates:
+            - Path=/auth/**,//auth/**
+        - id: mdata
+          uri: ${DEFAULT_GATEWAY_ROUTES_URI:http://dev.sh}
+          order: 103
+          predicates:
+            - Path=/mdata/**,//mdata/**
+        - id: file
+          uri: ${DEFAULT_GATEWAY_ROUTES_URI:http://dev.sh}
+          order: 104
+          predicates:
+            - Path=/file/**,//file/**
+        - id: workbench
+          uri: ${DEFAULT_GATEWAY_ROUTES_URI:http://dev.sh}
+          order: 105
+          predicates:
+            - Path=/workbench/**,//workbench/**
+        - id: workflow
+          uri: ${DEFAULT_GATEWAY_ROUTES_URI:http://dev.sh}
+          order: 106
+          predicates:
+            - Path=/workflow/**,//workflow/**
+        - id: expense
+          uri: ${DEFAULT_GATEWAY_ROUTES_URI:http://dev.sh}
+          order: 107
+          predicates:
+            - Path=/expense/**,//expense/**
+        - id: contract
+          uri: ${DEFAULT_GATEWAY_ROUTES_URI:http://dev.sh}
+          order: 108
+          predicates:
+            - Path=/contract/**,//contract/**
+        - id: budget
+          uri: ${DEFAULT_GATEWAY_ROUTES_URI:http://dev.sh}
+          order: 109
+          predicates:
+            - Path=/budget/**,//budget/**
+        - id: asset
+          uri: ${DEFAULT_GATEWAY_ROUTES_URI:http://dev.sh}
+          order: 110
+          predicates:
+            - Path=/asset/**,//asset/**
+        - id: tax
+          uri: ${DEFAULT_GATEWAY_ROUTES_URI:http://dev.sh}
+          order: 111
+          predicates:
+            - Path=/tax/**,//tax/**
+        - id: travel
+          uri: ${DEFAULT_GATEWAY_ROUTES_URI:http://dev.sh}
+          order: 112
+          predicates:
+            - Path=/travel/**,//travel/**
+        - id: peripheral
+          uri: ${DEFAULT_GATEWAY_ROUTES_URI:http://dev.sh}
+          order: 113
+          predicates:
+            - Path=/peripheral/**,//peripheral/**
+        - id: mobile
+          uri: ${DEFAULT_GATEWAY_ROUTES_URI:http://dev.sh}
+          order: 114
+          predicates:
+            - Path=/mobile/**,//mobile/**
+        - id: haep
+          uri: ${DEFAULT_GATEWAY_ROUTES_URI:http://dev.sh}
+          order: 115
+          predicates:
+            - Path=/haep/**,//haep/**
+        - id: webexcel
+          uri: ${DEFAULT_GATEWAY_ROUTES_URI:http://dev.sh}
+          order: 116
+          predicates:
+            - Path=/webexcel/**,//webexcel/**
+        - id: job
+          uri: ${DEFAULT_GATEWAY_ROUTES_URI:http://dev.sh}
+          order: 117
+          predicates:
+            - Path=/job/**,//job/**
+        - id: report
+          uri: ${DEFAULT_GATEWAY_ROUTES_URI:http://dev.sh}
+          order: 118
+          predicates:
+            - Path=/report/**,//report/**
+        - id: ureport
+          uri: ${DEFAULT_GATEWAY_ROUTES_URI:http://dev.sh}
+          order: 119
+          predicates:
+            - Path=/ureport/**,//ureport/**
+
+demo:
+  gateway:
+    ip-check-enabled: ${IP_CHECK_ENABLED:false}
+    api-allow-enabled: ${API_ALLOW_ENABLED:true}
+    find-allow-url-enabled: ${FIND_ALLOW_URL_ENABLED:false}
+    white:
+      # 正则匹配 D类网段 192.168.0.0/24
+      network-segment[0]: 192.168.0.(1\d{2}|2[0-4]\d|25[0-5]|[1-9]\d|\d)$
+      # 正则匹配 D类网段 192.168.0.1/24
+      network-segment[1]: 192.168.1.(1\d{2}|2[0-4]\d|25[0-5]|[1-9]\d|\d)$
+      network-segment[2]: 192.168.5.151
+      # network-segment[3]: 192.168.5.152
+    block:
+      ip[0]: 192.168.245.1
+      # ip[1]: 192.168.245.2
+
+    front-suffix: bmp,pcx,tif,gif,jpg,jpeg,tga,exif,fpx,svg,psd,png,raw,ico,css,js,htm
+    app-map:
+      api:
+        "[/api/account]": "GET"
+        "[/api/custom/enumerations/template/by/type]": "GET"
+      auth:
+        "[/auth/oauth/token]": "POST"
+        "[/auth/sso/oa/oauth/getTokenByCode]": [ "GET","POST" ]
+        # "[/auth/util/getEnvironmentInfo]": "GET"
+      base:
+        "[/base/api/home]": "GET"
+        "[/base/api/user/list/avatar]": "POST"
+        "[/base/api/user/search/all]": "GET"
+        "[/base/api/param/value/get/by/code]": "POST"
+        "[/base/api/custom/enumerations/template/by/type]": "GET"
+      mdata:
+        "[/mdata/api/get/default/unit]": "GET"
+        "[/mdata/api/carousels/list/by/user/id]": "GET"
+        "[/mdata/api/invoice/type/query/for/invoice]": "GET"
+        "[/mdata/api/invoice/type/sob/tenant/query]": "GET"
+
+    app-path-param-map:
+      mdata:
+        "[(/mdata/api/setOfBooks/[0-9]{19})]": "GET"
+        "[(/mdata/api/users/oid/[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12})]": "GET"
+        "[(/mdata/api/invoice/type/mould/query/[0-9]{19})]": "GET"
