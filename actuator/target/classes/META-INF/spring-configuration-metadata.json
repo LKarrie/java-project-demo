@@ -1,0 +1,58 @@
+{
+  "groups": [
+    {
+      "name": "management.endpoint.test-web-endpoint",
+      "type": "com.psbc.actuator.endpoints.TestCustomEndpoints",
+      "sourceType": "com.psbc.actuator.endpoints.TestCustomEndpoints"
+    },
+    {
+      "name": "management.metrics.web.tags.uri",
+      "type": "com.psbc.actuator.v2.CustomMetricsProperties",
+      "sourceType": "com.psbc.actuator.v2.CustomMetricsProperties"
+    },
+    {
+      "name": "test",
+      "type": "com.psbc.actuator.prometheus.custom.factory.MeterProperties",
+      "sourceType": "com.psbc.actuator.prometheus.custom.factory.MeterProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "management.endpoint.test-web-endpoint.cache.time-to-live",
+      "type": "java.time.Duration",
+      "description": "Maximum time that a response can be cached.",
+      "sourceType": "com.psbc.actuator.endpoints.TestCustomEndpoints",
+      "defaultValue": "0ms"
+    },
+    {
+      "name": "management.endpoint.test-web-endpoint.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable the testWebEndpoint endpoint.",
+      "sourceType": "com.psbc.actuator.endpoints.TestCustomEndpoints",
+      "defaultValue": true
+    },
+    {
+      "name": "management.metrics.web.tags.uri.default-name",
+      "type": "java.lang.String",
+      "sourceType": "com.psbc.actuator.v2.CustomMetricsProperties",
+      "defaultValue": "\/unmonitored"
+    },
+    {
+      "name": "management.metrics.web.tags.uri.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "com.psbc.actuator.v2.CustomMetricsProperties",
+      "defaultValue": false
+    },
+    {
+      "name": "management.metrics.web.tags.uri.monitored",
+      "type": "java.util.Set",
+      "sourceType": "com.psbc.actuator.v2.CustomMetricsProperties"
+    },
+    {
+      "name": "test.meters",
+      "type": "java.util.List<com.psbc.actuator.prometheus.custom.factory.MeterProperties$Meter>",
+      "sourceType": "com.psbc.actuator.prometheus.custom.factory.MeterProperties"
+    }
+  ],
+  "hints": []
+}
